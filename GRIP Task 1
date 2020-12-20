@@ -1,0 +1,74 @@
+> #GRIP Task 1 Prediction Using Supervised ML with R
+> # Siddhi Rathod
+> #Importing the dataset
+> data=read.csv("https://raw.githubusercontent.com/AdiPersonalWorks/Random/master/student_scores%20-%20student_scores.csv")
+> head(data)
+  Hours Scores
+1   2.5     21
+2   5.1     47
+3   3.2     27
+4   8.5     75
+5   3.5     30
+6   1.5     20
+> #Summary of Data
+> summary(data)
+     Hours           Scores     
+ Min.   :1.100   Min.   :17.00  
+ 1st Qu.:2.700   1st Qu.:30.00  
+ Median :4.800   Median :47.00  
+ Mean   :5.012   Mean   :51.48  
+ 3rd Qu.:7.400   3rd Qu.:75.00  
+ Max.   :9.200   Max.   :95.00  
+> #Assinging variable to data
+> hour=data$Hours
+> score=data$Scores
+> # Fitting the Model
+> model=lm(score~hour)
+> model
+
+Call:
+lm(formula = score ~ hour)
+
+Coefficients:
+(Intercept)         hour  
+      2.484        9.776  
+> #Plotting the Model
+> plot(hour,score,main="Hour Vs Score",ylab="Score",xlab="Hour Studied",col="blue")
+> abline(model,col="red")
+> #Comparing Actual and Predicted Scores
+> actual=score
+> hour=data.frame(hour)
+> predicted=predict(model,hour)
+> cbind(actual,predicted)
+   actual predicted
+1      21  26.92318
+2      47  52.34027
+3      27  33.76624
+4      75  85.57800
+5      30  36.69899
+6      20  17.14738
+7      88  92.42106
+8      60  56.25059
+9      81  83.62284
+10     25  28.87834
+11     85  77.75736
+12     62  60.16091
+13     41  46.47479
+14     42  34.74382
+15     17  13.23706
+16     95  89.48832
+17     30  26.92318
+18     24  21.05770
+19     67  62.11607
+20     69  74.82462
+21     30  28.87834
+22     54  49.40753
+23     35  39.63173
+24     76  69.93672
+25     86  78.73494
+> #Predicted Score if Student studied for 9.25hrs/day
+> test=data.frame(hour=9.25)
+> predict(model,test)
+       1 
+92.90985 
+
